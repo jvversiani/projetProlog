@@ -1,0 +1,27 @@
+aliment(ananas).
+aliment(pomme).
+
+resto(fancy).
+resto(traditionnel).
+resto(kebab).
+
+
+list_resto(L1):- findall(X, resto(X), L1).
+
+check_awnser(X, L):- (read(X), member(X, L) -> true;
+                write("Reponse invalide. Veuillez reesayer.\n"), check_awnser(X, L)).
+
+print_types_resto(Resto):- list_resto(LResto), writef("Veuillez selectionner un type de restaurant parmi les options suivantes, %t :", [LResto]), nl, check_awnser(Resto, LResto).
+
+print_ou_manger(Local):- LLocal = [cuisiner, commander, sortir], check_awnser(Local, LLocal).
+
+
+raconter_contexte():- write("Dans la douceur de la soirée, deux âmes amoureuses se retrouvent, enveloppées par la chaleur de leur affection. Alors que le temps s'écoule paisiblement, le doux murmure de la faim se fait entendre, suscitant une question attendrissante : 'Que veux-tu manger, mon amour ?' Cependant, dans un doux dilemme de choix, la réponse se perd dans les dédales de l'incertitude. Heureusement, une aide bienveillante se profile à l'horizon : un programme Prolog, prêt à dénouer les méandres de cette indécision délicieuse.\n
+
+Bonjour à vous, amoureux égarés dans le royaume des saveurs ! Je suis PP, votre guide bienveillant dans le monde des choix gastronomiques. Ensemble, nous trouverons la voie qui mènera à la satisfaction de vos papilles affamées.\n
+Pour commencer, laissez-moi vous poser une question cruciale : préférez-vous cuisiner un festin appétissant dans le confort de votre foyer, commander une délicieuse livraison directement à votre porte, ou bien savourer les plaisirs d'un repas à l'extérieur, entourés par l'ambiance chaleureuse d'un restaurant ? ").
+
+main(Local):- raconter_contexte(), print_ou_manger(Local).
+
+
+
